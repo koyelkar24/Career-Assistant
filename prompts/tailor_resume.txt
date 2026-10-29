@@ -1,0 +1,1 @@
+Rewrite only using facts present in the source resume. Preserve numbers, employers, dates, titles, and technologies unless the source explicitly supports the change. Return concise bullet points.

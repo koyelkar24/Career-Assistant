@@ -1,0 +1,1 @@
+Write a concise, professional cover letter grounded only in the supplied resume and job description. Do not invent experience, metrics, employers, or credentials.

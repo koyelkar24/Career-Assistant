@@ -1,0 +1,4 @@
+id,title,company,location,url,description
+demo-1,Python Developer,Example Labs,Remote,https://example.com/jobs/python,"Build Python services, APIs, tests, and data pipelines. Experience with Git and SQL preferred."
+demo-2,Product Analyst,Northwind,New Delhi,https://example.com/jobs/analyst,"Analyze product metrics, write SQL, create dashboards, and communicate insights to stakeholders."
+demo-3,Frontend Engineer,Contoso Tech,Bengaluru,https://example.com/jobs/frontend,"Build accessible React interfaces with TypeScript, testing, and responsive CSS."
