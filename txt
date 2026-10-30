@@ -1,0 +1,35 @@
+career-assistant/
+  app.py                  # landing page and session setup
+  pages/
+    1_Resume_and_ATS.py
+    2_Job_Search.py
+    3_Tracker.py
+    4_Mock_Interview.py
+  core/
+    parser.py             # load + structure resume
+    security.py           # PII redaction, injection scan, hidden text
+    scorer.py             # hybrid ATS score
+    tailor.py             # truthful rewrite + grounding check
+    cover_letter.py
+    scam_detector.py
+    interview.py
+    roadmap.py
+    rag.py                # Chroma helpers
+    graph.py              # LangGraph flow
+    llm.py                # one place for model calls, retry, cache
+  services/
+    jobs_api.py           # JSearch + CSV fallback
+    email_sender.py       # Gmail SMTP
+    db.py                 # SQLite: tracker, cache, logs
+    export.py             # DOCX/PDF
+  schemas/models.py       # all Pydantic models
+  prompts/                # prompt templates as text files
+  tests/
+    eval_pairs/           # 15 resume/JD pairs + expected ranges
+    test_scorer.py
+    test_security.py
+    test_scam.py
+  data/jobs.csv
+  .env.example
+  requirements.txt
+  README.md
