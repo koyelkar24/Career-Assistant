@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from core.ui import render_site_navigation
+
 
 def initialize_session(session_state) -> None:
     """Create shared values once, keeping user data available across pages."""
@@ -78,6 +80,10 @@ def _add_styles(st) -> None:
         .tool-icon { display: flex; width: 42px; height: 42px; align-items: center; justify-content: center; margin-bottom: 15px; border-radius: 13px; background: #edf6f0; font-size: 20px; }
         .tool-title { margin: 0 0 6px; color: var(--ink); font: 750 17px 'Manrope', sans-serif; letter-spacing: -.025em; }
         .tool-description { min-height: 42px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+        .tool-card-action { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px solid #edf1ed; color: var(--green); font-size: 13px; font-weight: 700; text-decoration: none; }
+        .tool-card-action:hover { color: var(--green-dark); }
+        .tool-card-action span { font-size: 17px; transition: transform .15s ease; }
+        .tool-card-action:hover span { transform: translateX(3px); }
         .st-key-resume_card [data-testid="stPageLink"] a,
         .st-key-jobs_card [data-testid="stPageLink"] a,
         .st-key-tracker_card [data-testid="stPageLink"] a,
@@ -114,12 +120,18 @@ def _add_styles(st) -> None:
 
 def _tool_card(st, key: str, icon: str, title: str, description: str, page: str, action: str) -> None:
     with st.container(key=key):
-        st.markdown(
+        routes = {
+            "pages/1_Resume_and_ATS.py": "/Resume_and_ATS",
+            "pages/2_Job_Search.py": "/Job_Search",
+            "pages/3_Tracker.py": "/Tracker",
+            "pages/4_Mock_Interview.py": "/Mock_Interview",
+        }
+        route = routes[page]
+        st.html(
             f'<div class="tool-icon">{icon}</div><div class="tool-title">{title}</div>'
-            f'<p class="tool-description">{description}</p>',
-            unsafe_allow_html=True,
+            f'<p class="tool-description">{description}</p>'
+            f'<a class="tool-card-action" href="{route}">{action}<span aria-hidden="true">&rarr;</span></a>'
         )
-        st.page_link(page, label=action)
 
 
 def main() -> None:
@@ -135,10 +147,11 @@ def main() -> None:
         page_title="Career Assistant | Your next move, made clearer",
         page_icon="🎯",
         layout="wide",
-        initial_sidebar_state="expanded",
+        initial_sidebar_state="collapsed",
     )
     initialize_session(st.session_state)
     _add_styles(st)
+    render_site_navigation(st)
 
     st.markdown(
         """

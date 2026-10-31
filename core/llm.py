@@ -39,13 +39,19 @@ def complete(prompt: str, *, model: str | None = None, retries: int = 2) -> str:
 
     if provider == "gemini":
         endpoint = f"https://generativelanguage.googleapis.com/v1beta/models/{selected_model}:generateContent"
+        request_body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}]}
+        # Gemini 3 defaults to medium thinking. Low is enough for these short,
+        # structured coaching responses and avoids spending time reasoning past
+        # what the task needs. Older model families do not accept this setting.
+        if selected_model.startswith("gemini-3"):
+            request_body["generationConfig"] = {"thinkingConfig": {"thinkingLevel": "low"}}
         for attempt in range(retries + 1):
             try:
                 response = requests.post(
                     endpoint,
                     headers={"x-goog-api-key": gemini_key},
-                    json={"contents": [{"role": "user", "parts": [{"text": prompt}]}]},
-                    timeout=60,
+                    json=request_body,
+                    timeout=(10, 45),
                 )
                 if not response.ok:
                     try:
@@ -64,6 +70,14 @@ def complete(prompt: str, *, model: str | None = None, retries: int = 2) -> str:
                     raise RuntimeError("Gemini returned no text. Please try again.")
                 _CACHE[cache_key] = result
                 return result
+            except requests.Timeout as exc:
+                # Repeating a generation request after the server has already
+                # spent 45 seconds rarely helps and can leave the UI blocked for
+                # minutes. Give the user a clear retry path instead.
+                raise RuntimeError(
+                    "Gemini took too long to respond. Please try the review again. "
+                    "Your local ATS score is still available."
+                ) from exc
             except requests.RequestException:
                 if attempt == retries:
                     raise

@@ -3,6 +3,50 @@
 from __future__ import annotations
 
 
+NAVIGATION = (
+    ("Dashboard", "/"),
+    ("Resume & ATS", "/Resume_and_ATS"),
+    ("Job Search", "/Job_Search"),
+    ("Tracker", "/Tracker"),
+    ("Mock Interview", "/Mock_Interview"),
+)
+
+
+def render_site_navigation(st) -> None:
+    """Render the shared HTML/CSS/JS navigation in the main page DOM."""
+    links = "".join(
+        f'<a class="career-nav-link" href="{path}">{label}</a>'
+        for label, path in NAVIGATION
+    )
+    st.html(
+        f"""
+        <style>
+          .career-nav {{ display:flex; align-items:center; justify-content:space-between; gap:18px; margin:0 0 28px; padding:10px 12px 10px 16px; border:1px solid #e5ece7; border-radius:16px; background:rgba(255,255,255,.94); box-shadow:0 5px 18px rgba(26,54,42,.035); }}
+          .career-nav-brand {{ display:flex; align-items:center; gap:10px; color:#172b2a; font:800 14px 'Manrope',sans-serif; letter-spacing:-.03em; white-space:nowrap; }}
+          .career-nav-mark {{ display:grid; place-items:center; width:30px; height:30px; border-radius:10px; color:#fff; background:#147d68; font-size:12px; }}
+          .career-nav-links {{ display:flex; flex-wrap:wrap; justify-content:flex-end; gap:4px; }}
+          .career-nav-link {{ padding:9px 12px; border-radius:10px; color:#687b77; font:650 12px 'DM Sans',sans-serif; text-decoration:none; transition:color .15s ease,background .15s ease; }}
+          .career-nav-link:hover,.career-nav-link.active {{ color:#0e5b4d; background:#edf6f0; }}
+          @media(max-width:720px) {{ .career-nav {{ align-items:flex-start; flex-direction:column; gap:8px; }} .career-nav-links {{ justify-content:flex-start; }} .career-nav-link {{ padding:8px 9px; }} }}
+        </style>
+        <nav class="career-nav" aria-label="Career Assistant navigation">
+          <div class="career-nav-brand"><span class="career-nav-mark">CA</span><span>Career Assistant</span></div>
+          <div class="career-nav-links">{links}</div>
+        </nav>
+        <script>
+          (() => {{
+            const current = window.location.pathname.replace(/\\/$/, "") || "/";
+            document.querySelectorAll(".career-nav-link").forEach((link) => {{
+              const route = new URL(link.href, window.location.href).pathname.replace(/\\/$/, "") || "/";
+              if (route === current) {{ link.classList.add("active"); link.setAttribute("aria-current", "page"); }}
+            }});
+          }})();
+        </script>
+        """,
+        unsafe_allow_javascript=True,
+    )
+
+
 def apply_workspace_styles(st) -> None:
     """Give every multipage screen the same calm, readable visual baseline."""
     st.markdown(
@@ -75,22 +119,8 @@ def apply_workspace_styles(st) -> None:
 
 
 def render_page_header(st, title: str, description: str, eyebrow: str = "Career workspace") -> None:
-    """Render a consistent page title and a visible navigation strip."""
-    def open_dashboard() -> None:
-        st.switch_page("app.py")
-
-    nav = st.columns(5, gap="small")
-    with nav[0]:
-        st.button("Dashboard", on_click=open_dashboard, use_container_width=True)
-    with nav[1]:
-        st.page_link("pages/1_Resume_and_ATS.py", label="Resume & ATS", use_container_width=True)
-    with nav[2]:
-        st.page_link("pages/2_Job_Search.py", label="Job Search", use_container_width=True)
-    with nav[3]:
-        st.page_link("pages/3_Tracker.py", label="Tracker", use_container_width=True)
-    with nav[4]:
-        st.page_link("pages/4_Mock_Interview.py", label="Interview", use_container_width=True)
-
+    """Render shared site navigation and a clear page title."""
+    render_site_navigation(st)
     st.markdown(
         f'<div class="workspace-eyebrow">{eyebrow}</div><h1>{title}</h1>'
         f'<p class="workspace-description">{description}</p>',
