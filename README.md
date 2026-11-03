@@ -1,6 +1,6 @@
 # Career Assistant
 
-A Streamlit workspace for resume analysis, job search, application tracking, and mock interviews.
+A browser based career workspace for resume analysis, job search, application tracking, and mock interviews. The interface is built with HTML, CSS, and JavaScript; the local Python server connects it to the career tools.
 
 ## Run locally
 
@@ -8,8 +8,10 @@ A Streamlit workspace for resume analysis, job search, application tracking, and
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-streamlit run app.py
+python server.py
 ```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser. Set `CAREER_HOST` or `CAREER_PORT` to change the local server address.
 
 The app works with the CSV fallback out of the box. Copy `.env.example` to `.env` only when enabling optional API, model, or SMTP integrations.
 
@@ -19,6 +21,8 @@ Copy `.env.example` to `.env` and set either `GEMINI_API_KEY` (optionally `GEMIN
 
 ## Layout
 
+- `web/` contains the HTML, CSS, and JavaScript interface.
+- `server.py` serves the interface and local JSON API.
 - `core/` contains parsing, security, scoring, tailoring, interview, scam, roadmap, retrieval, and orchestration logic.
 - `services/` contains job, email, database, and export integrations.
 - `schemas/` contains shared Pydantic models.
