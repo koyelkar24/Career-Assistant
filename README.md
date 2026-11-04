@@ -28,3 +28,6 @@ Copy `.env.example` to `.env` and set either `GEMINI_API_KEY` (optionally `GEMIN
 - `schemas/` contains shared Pydantic models.
 - `pages/` contains the four Streamlit pages.
 - `tests/` contains unit tests and an evaluation-fixture location.
+
+
+
