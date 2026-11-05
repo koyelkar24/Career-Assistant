@@ -1,2 +1,33 @@
 .featured-resume{display:flex;align-items:center;gap:16px;width:100%;padding:17px 20px;border:1px solid #cbd6ff;border-radius:13px;background:linear-gradient(100deg,#fff 0%,#f2f5ff 100%);box-shadow:0 5px 18px rgba(53,95,232,.07);text-align:left;transition:transform .16s,border-color .16s,box-shadow .16s}.featured-resume:hover{transform:translateY(-2px);border-color:#9eb0fb;box-shadow:0 10px 25px rgba(53,95,232,.12)}.featured-icon{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:12px;background:#e4eaff;color:#355fe8;font:800 12px Manrope,sans-serif}.featured-copy{display:flex;flex:1;flex-direction:column;gap:4px}.featured-copy small{color:#526ac4;font-size:8px;font-weight:800;letter-spacing:.12em}.featured-copy strong{color:#17243b;font:750 14px Manrope,sans-serif;letter-spacing:-.02em}.featured-copy em{color:#69758c;font-size:10px;font-style:normal}.featured-action{display:flex;align-items:center;gap:16px;color:#355fe8;font-size:10px;font-weight:700;white-space:nowrap}.featured-action b{font-size:16px;font-weight:400}.featured-resume+.section-head{margin-top:29px}
 @media(max-width:760px){.featured-resume{align-items:flex-start;padding:14px}.featured-action{display:none}.featured-copy em{line-height:1.5}}
+
+/* Landing page refresh */
+#view-dashboard .hero{min-height:326px;padding:42px 46px;border-radius:22px;background:radial-gradient(ellipse at 77% 5%,#5579df 0,transparent 36%),linear-gradient(120deg,#152543 0%,#1e3972 60%,#294da4 100%);box-shadow:0 18px 42px rgba(25,48,103,.2)}
+#view-dashboard .hero:after{right:-120px;bottom:-245px;width:410px;height:410px;border-color:#ffffff20;box-shadow:0 0 0 42px #ffffff08,0 0 0 88px #ffffff06}
+#view-dashboard .hero-orb{right:110px;top:-230px;width:360px;height:360px;background:#91aaff30}
+#view-dashboard .hero-content{max-width:540px}
+#view-dashboard .hero h1{max-width:520px;font-size:clamp(39px,4.2vw,54px);letter-spacing:-.065em}
+#view-dashboard .hero-content>p{max-width:440px;font-size:13px}
+#view-dashboard .hero-aside{flex-basis:230px;margin-right:0;padding:18px 16px;border-color:#ffffff2e;border-radius:16px;background:#ffffff12}
+#view-dashboard .hero-aside>span{display:block;margin:0 0 12px;color:#d4deff;font-size:8px;letter-spacing:.14em}
+#view-dashboard .hero-step{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #ffffff20}
+#view-dashboard .hero-step>b{display:grid;place-items:center;flex:0 0 27px;height:27px;border:1px solid #ffffff44;border-radius:9px;color:#e5eaff;font:800 9px Manrope,sans-serif}
+#view-dashboard .hero-step p{flex:1;margin:0}
+#view-dashboard .hero-step strong,#view-dashboard .hero-step small{display:block}
+#view-dashboard .hero-step strong{color:#fff;font:700 10px Manrope,sans-serif}
+#view-dashboard .hero-step small{margin-top:3px;color:#c8d4fa;font-size:8px}
+#view-dashboard .hero-step>i{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#ffffff16;color:#fff;font-size:10px;font-style:normal}
+#view-dashboard .hero-step:first-of-type>i{background:#b8f0d5;color:#15543f}
+#view-dashboard .featured-resume{margin-top:18px;padding:18px 21px;border-color:#dce4f7;background:linear-gradient(105deg,#fff 0%,#f6f8ff 100%)}
+#view-dashboard .featured-icon{width:42px;height:42px;background:#e5ebff}
+#view-dashboard .section-head{margin-top:34px}
+#view-dashboard .section-head h2{font-size:21px}
+#view-dashboard .tool-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+#view-dashboard .tool-card{min-height:190px;padding:20px;border-radius:15px}
+#view-dashboard .tool-card:hover{border-color:#bdcbfa;box-shadow:0 12px 28px rgba(29,43,74,.09)}
+#view-dashboard .tool-card h3{font-size:15px}
+#view-dashboard .tool-card p{font-size:11px}
+#view-dashboard .snapshot{margin-top:18px;padding:18px 21px;border-radius:14px}
+#view-dashboard .snapshot strong{font-size:16px}
+@media(max-width:1000px){#view-dashboard .hero{padding:34px 30px}#view-dashboard .hero-aside{flex-basis:205px}#view-dashboard .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#view-dashboard .hero{padding:29px 24px}#view-dashboard .hero h1{font-size:38px}#view-dashboard .hero-aside{display:none}#view-dashboard .tool-grid{grid-template-columns:1fr}#view-dashboard .tool-card{min-height:0;padding:18px}}
