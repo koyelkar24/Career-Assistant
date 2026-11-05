@@ -2,6 +2,8 @@
 
 A browser based career workspace for resume analysis, job search, application tracking, and mock interviews. The interface is built with HTML, CSS, and JavaScript; the local Python server connects it to the career tools.
 
+The landing dashboard gives you a guided starting point: review your resume, explore roles, and track application follow-ups. Its checklist and summary cards make it easy to continue from the overview, while the toolkit cards open each part of the workspace.
+
 ## Run locally
 
 ```powershell
@@ -22,6 +24,7 @@ Copy `.env.example` to `.env` and set either `GEMINI_API_KEY` (optionally `GEMIN
 ## Layout
 
 - `web/` contains the HTML, CSS, and JavaScript interface.
+- `web/index.html` contains the dashboard and workspace views; `web/styles.css` and `web/visibility.css` provide the shared and dashboard styling.
 - `server.py` serves the interface and local JSON API.
 - `core/` contains parsing, security, scoring, tailoring, interview, scam, roadmap, retrieval, and orchestration logic.
 - `services/` contains job, email, database, and export integrations.
