@@ -1,13 +1,16 @@
 # Career Assistant
 
-A responsive AI-powered career workspace for career guidance, resume building and analysis, job recommendations, skill planning, interview practice, and application tracking. The frontend uses React, Vite, Tailwind CSS, and Lucide React; the local Python server connects it to the career tools.
+Career Assistant is a website for planning your next career move. It brings career guidance, resumes, job suggestions, skill development, interview practice, and application tracking into one workspace.
 
-The workspace opens on a personalized dashboard, with an optional product landing page available from the Northstar logo. The dashboard brings together readiness, career paths, skill progress, recommendations, and next steps.
+The app opens on the dashboard. Select the Northstar logo in the sidebar to see the welcome page.
 
-## Run locally
+## Start the app on Windows
+
+You’ll need **Python 3.10 or newer** and **Node.js 20 or newer** installed on your computer. Node.js includes npm, which installs and builds the website.
+
+Open PowerShell in this project folder and run these commands one at a time:
 
 ```powershell
-node --version # Node.js 20 or newer
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -18,26 +21,27 @@ cd ..
 python server.py
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser. Set `CAREER_HOST` or `CAREER_PORT` to change the local server address.
+The first setup can take a few minutes while the required files are downloaded. When the server says it is running, open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser. Leave the PowerShell window open while you use the website. To stop the server, press **Ctrl+C** in that window.
 
-For frontend development, run `npm run dev` from `web/` and run `python server.py` in a second terminal. Vite forwards `/api` requests to the Python server. The production server serves `web/dist` after a build.
+## Use the app while developing
 
-The app works with the CSV fallback out of the box. Copy `.env.example` to `.env` only when enabling optional API, model, or SMTP integrations.
+If you’re changing the website and want to see updates as you work, open two PowerShell windows in the project folder:
 
-## AI career coaching
+1. In the first window, run `python server.py`.
+2. In the second window, run `cd web` and then `npm run dev`.
+3. Open the local address printed by Vite in the second window.
 
-Copy `.env.example` to `.env` and set either `GEMINI_API_KEY` (optionally `GEMINI_MODEL`) or `OPENAI_API_KEY` (optionally `OPENAI_MODEL`) to enable the resume-to-job review and detailed mock interview coaching. If both provider keys are set, Gemini is used. Without a key, ATS scoring and basic interview feedback continue to work offline. AI resume reviews redact detected personal information before sending text to the configured model; resume and job text is otherwise processed by that provider. Treat generated rewrites as suggestions and verify that every claim accurately reflects your experience. The `.env` file is ignored by Git so provider keys stay local.
+## Optional AI features
 
-## Layout
+The app works without an AI account. Resume scoring and basic interview feedback are available offline. To enable AI career chat and more detailed resume or interview feedback, add an API key from **Gemini** or **OpenAI** to a file named `.env` in the project folder.
 
-- `web/src/` contains the reusable React workspace and its views; `web/src/styles.css` and `web/src/landing.css` provide responsive styling.
-- `web/` contains the Vite configuration and production build output.
-- `server.py` serves the interface and local JSON API.
-- `core/` contains parsing, security, scoring, tailoring, interview, scam, roadmap, retrieval, and orchestration logic.
-- `services/` contains job, email, database, and export integrations.
-- `schemas/` contains shared Pydantic models.
-- `pages/` contains the four Streamlit pages.
-- `tests/` contains unit tests and an evaluation-fixture location.
+To create that file, copy `.env.example` to `.env`, then replace the example value with your key. Keep `.env` private; it is excluded from Git so the key is not added to project changes. If both providers are configured, the app uses Gemini.
 
+When AI feedback is enabled, the relevant text is sent to the provider you configured. Resume reviews remove detected contact details before sending; other resume and job-description text may still be included. Check AI suggestions for accuracy before using them.
 
+## Where things live
 
+- `web/` contains the website and its design.
+- `server.py` runs the local website and connects it to the career tools.
+- `core/` and `services/` contain the resume, job, and interview features.
+- `data/`, `schemas/`, and `pages/` contain supporting information and other app views.

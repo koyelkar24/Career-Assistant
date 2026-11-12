@@ -1,0 +1,6 @@
+.app-error{min-height:100vh;display:grid;place-items:center;padding:24px;background:#f7f8fc;color:#252941;font-family:'DM Sans',sans-serif}
+.app-error>div{max-width:520px;padding:30px;border:1px solid #eceef4;border-radius:14px;background:#fff;box-shadow:0 12px 40px #2027470a}
+.app-error>div>span{display:inline-grid;width:36px;height:36px;place-items:center;border-radius:10px;background:#eff1ff;color:#5368ed;font:700 13px 'Plus Jakarta Sans',sans-serif}
+.app-error h1{font:700 20px 'Plus Jakarta Sans',sans-serif;margin:15px 0 8px}
+.app-error p{color:#858b9d;font-size:12px;line-height:1.6}
+.app-error button{border:0;border-radius:8px;padding:10px 14px;background:#5368ed;color:#fff;font-size:11px;font-weight:600}
