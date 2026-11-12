@@ -1,62 +1,17 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f7fb">
-  <title>Career Assistant — Move forward with intent</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/visibility.css">
-</head>
-<body>
-  <div class="shell">
-    <aside class="sidebar">
-      <a class="brand" href="#dashboard"><span class="brand-mark">CA</span><span>Career Assistant<small>YOUR CAREER WORKSPACE</small></span></a>
-      <div class="nav-label">WORKSPACE</div>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#dashboard" data-view="dashboard" class="active"><span>⌂</span>Overview</a>
-        <a href="#resume" data-view="resume"><span>▤</span>Resume &amp; ATS</a>
-        <a href="#jobs" data-view="jobs"><span>⌕</span>Find opportunities</a>
-        <a href="#tracker" data-view="tracker"><span>▣</span>Application tracker</a>
-        <a href="#interview" data-view="interview"><span>◎</span>Interview practice</a>
-      </nav>
-      <div class="sidebar-bottom"><div class="privacy-icon">✓</div><strong>Your workspace, your pace</strong><p>Resume reviews run locally. Optional AI coaching is only used when configured.</p></div>
-      <div class="sidebar-foot">CAREER ASSISTANT <span>·</span> LOCAL WORKSPACE</div>
-    </aside>
-    <main class="main">
-      <header class="topbar"><div class="crumb"><span>Workspace</span><b>/</b><strong id="crumb-current">Overview</strong></div><div class="top-status"><span class="status-dot"></span><span id="ai-status">Offline tools ready</span></div></header>
-      <section class="view active" id="view-dashboard">
-        <div class="hero"><div class="hero-orb"></div><div class="hero-content"><div class="eyebrow light">A SMARTER SEARCH STARTS HERE</div><h1>Your next move<br>starts with a plan.</h1><p>Turn your experience into a stronger resume, find roles worth your time, and keep every application moving.</p><button class="button button-light" data-go="resume">Build your resume profile <span>→</span></button></div><div class="hero-aside"><span>YOUR CAREER CHECKLIST</span><div class="hero-step"><b>01</b><p><strong>Know your story</strong><small>Review your resume</small></p><i>✓</i></div><div class="hero-step"><b>02</b><p><strong>Find your fit</strong><small>Explore opportunities</small></p><i>↗</i></div><div class="hero-step"><b>03</b><p><strong>Build momentum</strong><small>Track every next step</small></p><i>↗</i></div></div></div>
-        <button class="featured-resume" data-go="resume"><span class="featured-icon">01</span><span class="featured-copy"><small>START HERE · RESUME STUDIO</small><strong>Resume &amp; ATS review</strong><em>Check your resume structure and match it to a target job description.</em></span><span class="featured-action">Open resume review <b>→</b></span></button>
-        <div class="section-head"><div><div class="eyebrow">YOUR CAREER TOOLKIT</div><h2>Make progress, one step at a time.</h2><p>Choose a tool and pick up wherever you are in your search.</p></div></div>
-        <div class="tool-grid">
-          <button class="tool-card" data-go="jobs"><span class="tool-no">02</span><span class="tool-arrow">↗</span><h3>Find your next role</h3><p>Search openings and review each listing for common warning signs.</p><span class="tool-link">Explore opportunities <b>→</b></span></button>
-          <button class="tool-card" data-go="tracker"><span class="tool-no">03</span><span class="tool-arrow">↗</span><h3>Application tracker</h3><p>Keep roles, application stages, and follow-up notes in one view.</p><span class="tool-link">View applications <b>→</b></span></button>
-          <button class="tool-card" data-go="interview"><span class="tool-no">04</span><span class="tool-arrow">↗</span><h3>Mock interview</h3><p>Practice role-based questions and get useful feedback on your answers.</p><span class="tool-link">Start practicing <b>→</b></span></button>
-        </div>
-        <div class="snapshot"><div><small>RESUME WORKSPACE</small><strong id="resume-snapshot">Not started yet</strong></div><i></i><div><small>ROLES IN YOUR SEARCH</small><strong><span id="job-count">0</span> <em>this session</em></strong></div><i></i><div><small>APPLICATIONS TRACKED</small><strong id="application-count">0</strong></div></div>
-        <p class="privacy-note">Search results stay in this browser session. Application records are stored locally.</p>
-      </section>
-      <section class="view" id="view-resume"><div class="page-heading"><div class="eyebrow">RESUME STUDIO</div><h1>Resume & ATS review</h1><p>Review the structure of your resume and compare its wording with a target role.</p></div>
-        <div class="panel"><div class="panel-title"><span class="step">01</span><div><h2>Build your review</h2><p>Your resume stays on this computer during local analysis.</p></div></div>
-          <form id="resume-form" class="form-grid"><label class="upload-box" for="resume-file"><span class="upload-icon">↑</span><strong>Choose your resume</strong><span>PDF, DOCX, or TXT · up to 12 MB</span><input id="resume-file" type="file" accept=".pdf,.docx,.txt" required><span id="file-name" class="file-name">Browse files</span></label><label class="field-label">Target job description<textarea id="job-description" rows="8" placeholder="Paste the role description for a role-specific ATS overview."></textarea><span class="field-hint">Optional. Add this to see keyword overlap and match insights.</span></label><div class="form-actions"><button class="button primary" type="submit">Analyze resume <span>→</span></button><span class="muted" id="resume-message"></span></div></form>
-        </div><div id="resume-results"></div>
-      </section>
-      <section class="view" id="view-jobs"><div class="page-heading"><div class="eyebrow">FIND OPPORTUNITIES</div><h1>Find your next role</h1><p>Search for openings and check postings for common warning signs.</p></div>
-        <form id="job-form" class="search-panel"><label>Role or keyword<input id="job-query" value="software engineer" placeholder="e.g. Product Designer"></label><label>Location<input id="job-location" placeholder="City, region, or remote"></label><button class="button primary" type="submit">Search jobs <span>→</span></button></form><div class="results-head" id="jobs-heading">Ready when you are</div><div id="jobs-results" class="job-list"><div class="empty-state"><span>⌕</span><strong>Your next opportunity starts with a search.</strong><p>Search by role, skill, or location to see matching openings.</p></div></div>
-      </section>
-      <section class="view" id="view-tracker"><div class="page-heading"><div class="eyebrow">STAY ORGANIZED</div><h1>Application tracker</h1><p>Keep each application, its current stage, and your next follow-up in one place.</p></div>
-        <div class="panel"><div class="panel-title"><span class="step">＋</span><div><h2>Add an application</h2><p>Capture the details while they are fresh.</p></div></div><form id="tracker-form" class="tracker-form"><label>Role<input id="track-title" required placeholder="e.g. Product Designer"></label><label>Company<input id="track-company" required placeholder="Company name"></label><label>Status<select id="track-status"><option>Saved</option><option>Applied</option><option>Interview</option><option>Offer</option><option>Rejected</option></select></label><label class="wide">Next step or note<input id="track-notes" placeholder="e.g. Follow up next Tuesday"></label><button class="button primary" type="submit">Add application <span>→</span></button></form></div>
-        <div class="results-head">Your applications <span id="tracker-total" class="count-pill">0</span></div><div id="tracker-results"></div>
-      </section>
-      <section class="view" id="view-interview"><div class="page-heading"><div class="eyebrow">PRACTICE WITH CONFIDENCE</div><h1>Mock interview</h1><p>Build confidence with realistic questions and practical feedback.</p></div>
-        <form id="interview-form" class="search-panel interview-setup"><label>Target role<input id="interview-role" value="Software Engineer"></label><label>Questions<select id="interview-count"><option value="3">3 questions</option><option value="1">1 question</option><option value="2">2 questions</option><option value="4">4 questions</option><option value="5">5 questions</option></select></label><button class="button primary" type="submit">Create practice round <span>→</span></button></form><div id="interview-results"></div>
-      </section>
-      <footer class="main-footer">Career Assistant <span>·</span> A little more clarity for your next move</footer>
-    </main>
-  </div>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="/app.js" defer></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fc" />
+    <meta name="description" content="Your AI-powered career workspace. Find direction, build skills, and move forward with confidence." />
+    <title>Northstar — AI Career Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
