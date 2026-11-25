@@ -119,6 +119,28 @@ class Handler(BaseHTTPRequestHandler):
                 role = str(data.get("role", "Software Engineer"))[:200]
                 count = max(1, min(5, int(data.get("count", 3))))
                 self.send_json({"questions": generate_questions(role, count)})
+            elif path == "/api/auth/register":
+                data = self.read_json()
+                name = str(data.get("name", "")).strip()[:120]
+                role = str(data.get("role", "Product Designer")).strip()[:120]
+                email = str(data.get("email", "")).strip()[:180]
+                password = str(data.get("password", ""))
+                if not name:
+                    raise ValueError("Enter your full name.")
+                if "@" not in email or "." not in email.split("@")[-1]:
+                    raise ValueError("Enter a valid email address.")
+                if len(password) < 6:
+                    raise ValueError("Choose a password of at least 6 characters.")
+                user = DB.create_user(name, role, email, password)
+                self.send_json({"user": user}, 201)
+            elif path == "/api/auth/login":
+                data = self.read_json()
+                email = str(data.get("email", "")).strip()[:180]
+                password = str(data.get("password", ""))
+                if not email or not password:
+                    raise ValueError("Enter both your email and password.")
+                user = DB.authenticate_user(email, password)
+                self.send_json({"user": user})
             elif path == "/api/interview/feedback":
                 data = self.read_json()
                 self.send_json(evaluate_answer(str(data.get("answer", ""))[:8000], str(data.get("role", ""))[:200], str(data.get("question", ""))[:1000]))

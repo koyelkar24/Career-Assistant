@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {
   Activity, ArrowDownRight, ArrowRight, ArrowUpRight, Award, Bell, BookOpen, Bookmark, BriefcaseBusiness,
   CalendarDays, Check, CheckCircle2, ChevronDown, ChevronRight, ClipboardList, Clock3, Compass,
-  Download, ExternalLink, FileCheck2, FileText, Flame, Gauge, GraduationCap, LayoutDashboard,
-  Lightbulb, Menu, MessageCircle, Mic2, MoreHorizontal, Plus, Printer, Search, Send, Settings,
+  Download, ExternalLink, Eye, EyeOff, FileCheck2, FileText, Flame, Gauge, GraduationCap, LayoutDashboard,
+  Lightbulb, Lock, LogOut, Mail, Menu, MessageCircle, Mic2, MoreHorizontal, Plus, Printer, Search, Send, Settings,
   ShieldCheck, SlidersHorizontal, Sparkles, Target, TrendingUp, Upload, UserRound, WandSparkles, X, Zap
 } from 'lucide-react'
 
@@ -118,6 +118,15 @@ function loadArray(key, fallback) {
   }
 }
 
+function loadAuthUser() {
+  try {
+    const raw = localStorage.getItem('northstar.auth') || sessionStorage.getItem('northstar.auth')
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
+
 function api(path, options = {}) {
   return fetch(path, options).then(async res => {
     const data = await res.json().catch(() => ({}))
@@ -189,9 +198,9 @@ function SectionTitle({ eyebrow, title, description, action }) {
   )
 }
 
-function Button({ children, variant = 'primary', size = '', icon: Icon, onClick, ...props }) {
+function Button({ children, variant = 'primary', size = '', className = '', icon: Icon, onClick, ...props }) {
   return (
-    <button className={cx('btn', `btn-${variant}`, size && `btn-${size}`)} onClick={onClick} {...props}>
+    <button className={cx('btn', `btn-${variant}`, size && `btn-${size}`, className)} onClick={onClick} {...props}>
       {Icon && <Icon size={15} />}
       {children}
     </button>
@@ -230,7 +239,8 @@ function Modal({ title, onClose, wide = false, children }) {
 }
 
 function App() {
-  const [page, setPage] = useState('Overview')
+  const [authUser, setAuthUser] = useState(() => loadAuthUser())
+  const [page, setPage] = useState(() => (loadAuthUser() ? 'Overview' : 'Login'))
   const [mobileNav, setMobileNav] = useState(false)
   const [toast, setToast] = useState('')
   const [search, setSearch] = useState('')
@@ -337,7 +347,42 @@ function App() {
     }
   }
 
-  if (page === 'Landing') return <Landing go={go} initials={initials} />
+  const handleSignIn = (user, remember = true) => {
+    setAuthUser(user)
+    setProfile(prev => ({
+      ...prev,
+      name: user.name || prev.name,
+      role: user.role || prev.role,
+    }))
+    try {
+      const serialized = JSON.stringify(user)
+      if (remember) {
+        localStorage.setItem('northstar.auth', serialized)
+        sessionStorage.removeItem('northstar.auth')
+      } else {
+        sessionStorage.setItem('northstar.auth', serialized)
+        localStorage.removeItem('northstar.auth')
+      }
+    } catch {}
+    setPage('Overview')
+    notify(`Welcome back, ${(user.name || 'Alex').split(/\s+/)[0]}!`)
+  }
+
+  const handleSignOut = () => {
+    setAuthUser(null)
+    try {
+      localStorage.removeItem('northstar.auth')
+      sessionStorage.removeItem('northstar.auth')
+    } catch {}
+    setPage('Login')
+    setMobileNav(false)
+    notify('You have been signed out.')
+  }
+
+  if (page === 'Landing') return <Landing go={name => go(authUser ? name : 'Login')} initials={initials} authUser={authUser} />
+  if (!authUser || page === 'Login') {
+    return <LoginPage onSignIn={handleSignIn} onExplore={() => go('Landing')} />
+  }
 
   return (
     <div className="app-shell">
@@ -408,7 +453,16 @@ function App() {
             <div className="tip-orb" />
           </div>
           <div className="sidebar-foot">
-            <ShieldCheck size={14} /> Your career data stays yours <MoreHorizontal size={16} />
+            <ShieldCheck size={14} /> Your career data stays yours
+            <button
+              type="button"
+              className="sidebar-signout"
+              onClick={handleSignOut}
+              title="Sign out"
+              aria-label="Sign out"
+            >
+              <LogOut size={15} />
+            </button>
           </div>
         </div>
       </aside>
@@ -502,7 +556,7 @@ function App() {
           ) : page === 'Profile' ? (
             <Profile profile={profile} initials={initials} go={go} onEdit={() => setEditProfileOpen(true)} />
           ) : (
-            <SettingsPage notify={notify} onEditProfile={() => setEditProfileOpen(true)} />
+            <SettingsPage notify={notify} onEditProfile={() => setEditProfileOpen(true)} onSignOut={handleSignOut} />
           )}
         </div>
 
@@ -1040,7 +1094,7 @@ function PathRow({ icon, color, title, meta, match, note, onClick }) {
   )
 }
 
-function Landing({ go, initials }) {
+function Landing({ go, initials, authUser }) {
   return (
     <div className="landing-page">
       <div className="landing-nav">
@@ -1062,7 +1116,7 @@ function Landing({ go, initials }) {
           </button>
         </div>
         <Button variant="outline" size="sm" onClick={() => go('Overview')}>
-          Open workspace
+          {authUser ? 'Open workspace' : 'Sign in'}
         </Button>
       </div>
 
@@ -3005,7 +3059,7 @@ function Profile({ profile, initials, go, onEdit }) {
   )
 }
 
-function SettingsPage({ notify, onEditProfile }) {
+function SettingsPage({ notify, onEditProfile, onSignOut }) {
   const [prefs, setPrefs] = useState(() =>
     loadJSON('northstar.settings', {
       weeklySummary: true,
@@ -3103,9 +3157,271 @@ function SettingsPage({ notify, onEditProfile }) {
           >
             Keyboard shortcuts & tips <ArrowRight size={15} />
           </button>
+          <button className="settings-link" onClick={onSignOut} style={{ color: 'var(--rose)' }}>
+            Sign out of workspace <LogOut size={15} />
+          </button>
         </section>
       </div>
     </>
+  )
+}
+
+function LoginPage({ onSignIn, onExplore }) {
+  const [mode, setMode] = useState('signin')
+  const [name, setName] = useState('')
+  const [role, setRole] = useState('Product Designer')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [remember, setRemember] = useState(true)
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+
+  async function submit(e) {
+    e.preventDefault()
+    setError('')
+    setBusy(true)
+    try {
+      const endpoint = mode === 'signin' ? '/api/auth/login' : '/api/auth/register'
+      const payload =
+        mode === 'signin'
+          ? { email, password }
+          : { name, role, email, password }
+      const data = await api(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      onSignIn(data.user, remember)
+    } catch (err) {
+      setError(err.message || 'Unable to sign in. Please check your details.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <div className="auth-shell">
+      <section className="auth-showcase">
+        <div className="auth-showcase-grid" />
+        <button type="button" className="auth-brand" onClick={onExplore}>
+          <span className="brand-icon">
+            <Compass size={20} strokeWidth={2.3} />
+          </span>
+          <span className="brand-name">
+            northstar<span>CAREER STUDIO</span>
+          </span>
+        </button>
+
+        <div className="auth-showcase-body">
+          <div className="hero-kicker">
+            <Sparkles size={13} /> YOUR PERSONAL CAREER STUDIO
+          </div>
+          <h1>
+            Clarity for every step of <span>your career.</span>
+          </h1>
+          <p>
+            Bring your resume analysis, AI career coaching, skill roadmap, interview practice, and application
+            pipeline into one calm, private workspace.
+          </p>
+
+          <div className="auth-preview-card">
+            <div className="auth-preview-row">
+              <div className="auth-preview-stat">
+                <small>CAREER READINESS</small>
+                <strong>78 / 100</strong>
+              </div>
+              <span className="auth-preview-pill">
+                <TrendingUp size={13} /> +8 this month
+              </span>
+            </div>
+            <div className="auth-preview-row">
+              <div className="auth-preview-stat">
+                <small>TOP ROLE ALIGNMENT</small>
+                <strong>Senior Product Designer · 96%</strong>
+              </div>
+              <Sparkles size={18} color="#bac4ff" />
+            </div>
+          </div>
+        </div>
+
+        <div className="auth-showcase-foot">
+          <span>
+            <ShieldCheck size={15} /> Local-first privacy · Your data stays yours
+          </span>
+          <span>© {new Date().getFullYear()} Northstar</span>
+        </div>
+      </section>
+
+      <section className="auth-panel">
+        <div className="auth-mobile-brand">
+          <button type="button" className="landing-brand" onClick={onExplore}>
+            <span className="brand-icon">
+              <Compass size={19} />
+            </span>
+            northstar
+          </button>
+        </div>
+
+        <div className="auth-card">
+          <div className="auth-card-head">
+            <h2>{mode === 'signin' ? 'Welcome back' : 'Create your workspace'}</h2>
+            <p>
+              {mode === 'signin'
+                ? 'Sign in to continue to your Northstar career studio.'
+                : 'Set up a local account to keep your career progress organized.'}
+            </p>
+          </div>
+
+          <div className="auth-tabs" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mode === 'signin'}
+              className={cx(mode === 'signin' && 'active')}
+              onClick={() => {
+                setMode('signin')
+                setError('')
+              }}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mode === 'register'}
+              className={cx(mode === 'register' && 'active')}
+              onClick={() => {
+                setMode('register')
+                setError('')
+              }}
+            >
+              Create account
+            </button>
+          </div>
+
+          <form className="auth-form" onSubmit={submit}>
+            {mode === 'register' && (
+              <>
+                <label className="auth-field">
+                  <span>Full name</span>
+                  <div className="auth-input-wrap">
+                    <UserRound size={16} />
+                    <input
+                      value={name}
+                      onChange={e => setName(e.target.value)}
+                      placeholder="Alex Morgan"
+                      required
+                      autoComplete="name"
+                    />
+                  </div>
+                </label>
+
+                <label className="auth-field">
+                  <span>Current or target role</span>
+                  <div className="auth-input-wrap">
+                    <BriefcaseBusiness size={16} />
+                    <input
+                      value={role}
+                      onChange={e => setRole(e.target.value)}
+                      placeholder="Product Designer"
+                      required
+                    />
+                  </div>
+                </label>
+              </>
+            )}
+
+            <label className="auth-field">
+              <span>Email address</span>
+              <div className="auth-input-wrap">
+                <Mail size={16} />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  autoComplete="email"
+                />
+              </div>
+            </label>
+
+            <label className="auth-field">
+              <span>Password</span>
+              <div className="auth-input-wrap">
+                <Lock size={16} />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder={mode === 'register' ? 'At least 6 characters' : 'Enter your password'}
+                  required
+                  minLength={6}
+                  autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+                />
+                <button
+                  type="button"
+                  className="auth-eye"
+                  onClick={() => setShowPassword(v => !v)}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
+            </label>
+
+            <div className="auth-meta-row">
+              <label className="auth-remember">
+                <input type="checkbox" checked={remember} onChange={e => setRemember(e.target.checked)} />
+                Keep me signed in
+              </label>
+              <span>Stored locally</span>
+            </div>
+
+            {error && (
+              <div className="auth-error" role="alert">
+                {error}
+              </div>
+            )}
+
+            <Button type="submit" className="btn btn-primary auth-submit" disabled={busy}>
+              {busy
+                ? mode === 'signin'
+                  ? 'Signing in...'
+                  : 'Creating account...'
+                : mode === 'signin'
+                  ? 'Sign in to workspace'
+                  : 'Create account & enter'}{' '}
+              {!busy && <ArrowRight size={15} />}
+            </Button>
+          </form>
+
+          <div className="auth-divider">or</div>
+
+          <Button
+            type="button"
+            variant="outline"
+            className="btn btn-outline auth-demo-btn"
+            onClick={() =>
+              onSignIn(
+                { name: 'Alex Morgan', role: 'Product Designer', email: 'alex.morgan@northstar.local', demo: true },
+                remember
+              )
+            }
+          >
+            Continue with Demo Workspace (Alex Morgan)
+          </Button>
+        </div>
+
+        <div className="auth-panel-foot">
+          <span>New to Northstar?</span>
+          <button type="button" onClick={onExplore}>
+            Explore features overview <ArrowRight size={13} style={{ display: 'inline', verticalAlign: '-2px' }} />
+          </button>
+        </div>
+      </section>
+    </div>
   )
 }
 
