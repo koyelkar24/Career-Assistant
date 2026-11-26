@@ -22,10 +22,12 @@ from services.db import Database
 from services.jobs_api import search_jobs
 
 ROOT = Path(__file__).parent
-WEB = ROOT / "web"
-FRONTEND = WEB / "dist" if (WEB / "dist" / "index.html").is_file() else WEB
+FRONTEND = ROOT / "web"
 DB = Database(ROOT / "career_assistant.db")
 MAX_UPLOAD = 12 * 1024 * 1024
+
+mimetypes.add_type("text/javascript", ".js")
+mimetypes.add_type("text/css", ".css")
 
 
 class Handler(BaseHTTPRequestHandler):

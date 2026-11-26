@@ -20,9 +20,466 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/landing.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- Authentication View -->
+    <div id="view-login" class="auth-shell" hidden>
+      <section class="auth-showcase">
+        <div class="auth-showcase-grid"></div>
+        <button type="button" class="auth-brand" id="auth-brand-btn">
+          <span class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          <span class="brand-name">
+            northstar<span>CAREER STUDIO</span>
+          </span>
+        </button>
+
+        <div class="auth-showcase-body">
+          <div class="hero-kicker">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+            YOUR PERSONAL CAREER STUDIO
+          </div>
+          <h1>Clarity for every step of <span>your career.</span></h1>
+          <p>
+            Bring your resume analysis, AI career coaching, skill roadmap, interview practice, and application
+            pipeline into one calm, private workspace.
+          </p>
+
+          <div class="auth-preview-card">
+            <div class="auth-preview-row">
+              <div class="auth-preview-stat">
+                <small>CAREER READINESS</small>
+                <strong>78 / 100</strong>
+              </div>
+              <span class="auth-preview-pill">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                +8 this month
+              </span>
+            </div>
+            <div class="auth-preview-row">
+              <div class="auth-preview-stat">
+                <small>TOP ROLE ALIGNMENT</small>
+                <strong>Senior Product Designer · 96%</strong>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bac4ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-showcase-foot">
+          <span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            Local-first privacy · Your data stays yours
+          </span>
+          <span>© <span id="auth-year">2026</span> Northstar</span>
+        </div>
+      </section>
+
+      <section class="auth-panel">
+        <div class="auth-mobile-brand">
+          <button type="button" class="landing-brand" id="auth-mobile-brand-btn">
+            <span class="brand-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg>
+            </span>
+            northstar
+          </button>
+        </div>
+
+        <div class="auth-card">
+          <div class="auth-card-head">
+            <h2 id="auth-title">Welcome back</h2>
+            <p id="auth-subtitle">Sign in to continue to your Northstar career studio.</p>
+          </div>
+
+          <div class="auth-tabs" role="tablist">
+            <button type="button" role="tab" id="auth-tab-signin" class="active" aria-selected="true">Sign in</button>
+            <button type="button" role="tab" id="auth-tab-register" aria-selected="false">Create account</button>
+          </div>
+
+          <form class="auth-form" id="auth-form">
+            <div id="auth-register-fields" hidden style="display:flex;flex-direction:column;gap:14px">
+              <label class="auth-field">
+                <span>Full name</span>
+                <div class="auth-input-wrap">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                  <input id="auth-name" placeholder="Alex Morgan" autocomplete="name" />
+                </div>
+              </label>
+
+              <label class="auth-field">
+                <span>Current or target role</span>
+                <div class="auth-input-wrap">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                  <input id="auth-role" value="Product Designer" placeholder="Product Designer" />
+                </div>
+              </label>
+            </div>
+
+            <label class="auth-field">
+              <span>Email address</span>
+              <div class="auth-input-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <input id="auth-email" type="email" placeholder="you@example.com" required autocomplete="email" />
+              </div>
+            </label>
+
+            <label class="auth-field">
+              <span>Password</span>
+              <div class="auth-input-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input id="auth-password" type="password" placeholder="Enter your password" required minlength="6" autocomplete="current-password" />
+                <button type="button" class="auth-eye" id="auth-eye-btn" aria-label="Show password">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </label>
+
+            <div class="auth-meta-row">
+              <label class="auth-remember">
+                <input type="checkbox" id="auth-remember" checked />
+                Keep me signed in
+              </label>
+              <span>Stored locally</span>
+            </div>
+
+            <div class="auth-error" id="auth-error" role="alert" hidden></div>
+
+            <button type="submit" class="btn btn-primary auth-submit" id="auth-submit-btn">
+              Sign in to workspace
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </form>
+
+          <div class="auth-divider">or</div>
+
+          <button type="button" class="btn btn-outline auth-demo-btn" id="auth-demo-btn">
+            Continue with Demo Workspace (Alex Morgan)
+          </button>
+        </div>
+
+        <div class="auth-panel-foot">
+          <span>New to Northstar?</span>
+          <button type="button" id="auth-explore-btn">
+            Explore features overview
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Landing Page View -->
+    <div id="view-landing" class="landing-page" hidden>
+      <div class="landing-nav">
+        <a class="landing-brand" href="#overview" id="landing-brand-top">
+          <span class="brand-icon">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          northstar
+        </a>
+        <div class="landing-nav-links">
+          <button type="button" data-scroll-to="landing-features">Features</button>
+          <button type="button" data-scroll-to="landing-how">How it works</button>
+          <button type="button" data-scroll-to="landing-stories">Stories</button>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" id="landing-open-btn">Sign in</button>
+      </div>
+
+      <section class="landing-hero">
+        <div class="landing-copy">
+          <span class="badge subtle">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+            A more human kind of career AI
+          </span>
+          <h1>Your Career. Your Potential.<br /><span>Powered by AI.</span></h1>
+          <p>
+            Discover opportunities, build the skills that matter, and land a role that feels like you. Your next chapter
+            starts with a little more clarity.
+          </p>
+          <div class="landing-actions">
+            <button type="button" class="btn btn-primary" id="landing-hero-start">
+              Get started
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+            <button type="button" class="btn btn-outline" data-scroll-to="landing-features">
+              Explore features
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7 10 10"/><path d="M17 7v10H7"/></svg>
+            </button>
+          </div>
+          <small>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            Thoughtful guidance, always on your side
+          </small>
+        </div>
+
+        <div class="landing-preview">
+          <div class="preview-window">
+            <div class="preview-window-top">
+              <span></span><span></span><span></span>
+              <small>northstar · career studio</small>
+            </div>
+            <div class="preview-window-body">
+              <div class="preview-mini-side"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="preview-mini-main">
+                <small>YOUR WEEKLY CHECK-IN</small>
+                <h3 id="landing-greeting">Good morning, Alex ✳</h3>
+                <div class="preview-mini-metrics"><i></i><i></i><i></i></div>
+                <div class="preview-mini-panels"><i></i><i></i></div>
+                <div class="preview-mini-chart"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="landing-float landing-float-one">
+            <span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+            </span>
+            <div>
+              Career readiness
+              <strong>78% <i>↗ 8</i></strong>
+            </div>
+          </div>
+
+          <div class="landing-float landing-float-two">
+            <span class="float-avatar">L</span>
+            <div>
+              New best match
+              <strong>Product Designer · 96%</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="landing-trust">
+        <span>CAREER MOMENTUM, MEET YOUR MOMENT</span>
+        <div><i>✦</i> Built for your next chapter</div>
+        <div>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          Your data stays yours
+        </div>
+        <div>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+          Guidance that grows with you
+        </div>
+      </div>
+
+      <section id="landing-features" class="landing-section">
+        <div class="landing-section-head">
+          <div class="eyebrow">EVERYTHING, IN ONE THOUGHTFUL SPACE</div>
+          <h2>A little clarity changes everything.</h2>
+          <p>
+            From the first question to the offer you’ve been working toward, your career journey has a calm, focused home.
+          </p>
+        </div>
+
+        <div class="landing-feature-grid">
+          <button type="button" class="landing-feature" data-landing-go="AI Career Guidance">
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg></span>
+            <h3>Find your direction</h3>
+            <p>Talk through what matters and uncover career paths that feel like a natural next step.</p>
+            <i>Explore →</i>
+          </button>
+          <button type="button" class="landing-feature" data-landing-go="Resume Builder">
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m3 15 2 2 4-4"/></svg></span>
+            <h3>Tell your story well</h3>
+            <p>Build a thoughtful resume, understand its strengths, and make every word count.</p>
+            <i>Explore →</i>
+          </button>
+          <button type="button" class="landing-feature" data-landing-go="Job Recommendations">
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg></span>
+            <h3>Find the right fit</h3>
+            <p>Explore personalized opportunities matched to your experience, goals, and values.</p>
+            <i>Explore →</i>
+          </button>
+          <button type="button" class="landing-feature" data-landing-go="Skill Gap Analysis">
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+            <h3>Grow with intention</h3>
+            <p>See the skills you bring and take a focused, practical step toward where you want to go.</p>
+            <i>Explore →</i>
+          </button>
+          <button type="button" class="landing-feature" data-landing-go="Interview Preparation">
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12"/><circle cx="17" cy="7" r="5"/></svg></span>
+            <h3>Show up with confidence</h3>
+            <p>Practice real questions, find your voice, and walk into every conversation prepared.</p>
+            <i>Explore →</i>
+          </button>
+          <button type="button" class="landing-feature" data-landing-go="Application Tracker">
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span>
+            <h3>Keep your momentum</h3>
+            <p>A calm, clear view of each application and the next step that moves it forward.</p>
+            <i>Explore →</i>
+          </button>
+        </div>
+      </section>
+
+      <section id="landing-how" class="landing-how">
+        <div class="landing-section-head">
+          <div class="eyebrow">A JOURNEY THAT STARTS WITH YOU</div>
+          <h2>Small steps. Meaningful change.</h2>
+        </div>
+        <div class="how-steps">
+          <div>
+            <span>01</span>
+            <h3>Get to know you</h3>
+            <p>Share what you’re good at, what you care about, and what you’re curious about.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <h3>Find your focus</h3>
+            <p>Get a clearer picture of your next move and a plan shaped around your life.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <h3>Build your momentum</h3>
+            <p>Take one thoughtful step at a time, with a workspace that keeps it all together.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="landing-stories" class="landing-quote">
+        <div class="eyebrow">A LITTLE MORE CLARITY, FROM REAL PEOPLE</div>
+        <blockquote>
+          “For the first time, my career search felt less like a guessing game and more like a path I could actually see.”
+        </blockquote>
+        <div class="quote-author">
+          <span class="avatar" id="landing-quote-avatar">AM</span>
+          <span>
+            <strong>Jamie L.</strong>
+            <small>Product Designer · Found a role that feels right</small>
+          </span>
+        </div>
+        <div class="quote-stars">★★★★★</div>
+      </section>
+
+      <section class="landing-cta">
+        <div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+          <h2>Your next chapter is yours to shape.</h2>
+          <p>Let’s make the first step a thoughtful one.</p>
+        </div>
+        <button type="button" class="btn btn-white" id="landing-cta-btn">Get started for free →</button>
+      </section>
+
+      <footer class="landing-footer">
+        <a class="landing-brand" href="#overview" id="landing-brand-bottom">
+          <span class="brand-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          northstar
+        </a>
+        <span>© <span id="landing-year">2026</span> Northstar Career Studio</span>
+        <span>Made for the work you want to do.</span>
+      </footer>
+    </div>
+
+    <!-- Main Workspace Shell -->
+    <div id="app-shell" class="app-shell" hidden>
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#landing" id="brand-landing-link">
+          <span class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          <span class="brand-name">
+            northstar<span>CAREER STUDIO</span>
+          </span>
+          <button type="button" class="mobile-close" id="mobile-close-btn" aria-label="Close menu">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </a>
+
+        <button type="button" class="profile-switch" id="sidebar-profile-btn">
+          <span class="avatar" id="sidebar-avatar">AM</span>
+          <span>
+            <strong id="sidebar-name">Alex Morgan</strong>
+            <small id="sidebar-role">Product Designer</small>
+          </span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+
+        <nav class="side-nav" id="side-nav" aria-label="Primary navigation"></nav>
+
+        <div class="sidebar-bottom">
+          <div class="sidebar-tip">
+            <div class="tip-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+            </div>
+            <strong>Small steps, big moves.</strong>
+            <p>You're building steady momentum this week.</p>
+            <button type="button" id="sidebar-roadmap-btn">
+              View your roadmap
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+            <div class="tip-orb"></div>
+          </div>
+          <div class="sidebar-foot">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            Your career data stays yours
+            <button type="button" class="sidebar-signout" id="sidebar-signout-btn" title="Sign out" aria-label="Sign out">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <button type="button" class="mobile-scrim" id="mobile-scrim" hidden aria-label="Close navigation"></button>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button type="button" class="mobile-menu" id="mobile-menu-btn" aria-label="Open navigation">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+            <div class="breadcrumb">
+              Workspace
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              <strong id="crumb-page">Overview</strong>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <button type="button" class="icon-btn search-trigger" id="mobile-search-btn" aria-label="Search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </button>
+            <label class="global-search">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input id="global-search-input" placeholder="Search tools or topics..." />
+              <span class="search-kbd">/</span>
+            </label>
+            <button type="button" class="icon-btn bell-btn" id="bell-btn" aria-label="Notifications">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+              <i></i>
+            </button>
+            <span class="top-divider"></span>
+            <button type="button" class="top-profile" id="top-profile-btn">
+              <span class="avatar" id="top-avatar">AM</span>
+              <span id="top-name">Alex Morgan</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="page-wrap" id="page-wrap"></div>
+
+        <footer class="main-footer">
+          <span>© <span id="footer-year">2026</span> Northstar Career Studio</span>
+          <span id="footer-ai-status"><span class="online-dot"></span> Local workspace active</span>
+          <button type="button" id="shortcuts-btn">
+            Workspace shortcuts
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+          </button>
+        </footer>
+      </main>
+    </div>
+
+    <div id="modal-root"></div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <span id="toast-icon"></span>
+      <span id="toast-text"></span>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
   </body>
 </html>

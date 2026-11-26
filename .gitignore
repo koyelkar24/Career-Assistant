@@ -1,4 +1,4 @@
 .env
-web/node_modules/
-web/dist/
 .tools/
+__pycache__/
+*.pyc
