@@ -4,16 +4,32 @@ from __future__ import annotations
 
 import csv
 import os
+import re
 from pathlib import Path
 
 from schemas.models import Job
 
 
-def search_csv(query: str = "", path: str | Path = "data/jobs.csv") -> list[Job]:
-    query = query.lower().strip()
+def _search_terms(value: str) -> list[str]:
+    """Split a search phrase into lowercase words, keeping tokens like c++."""
+    return re.findall(r"[a-z0-9+#.]+", value.lower())
+
+
+def search_csv(query: str = "", location: str = "", path: str | Path = "data/jobs.csv") -> list[Job]:
+    query_terms = _search_terms(query)
+    location_terms = _search_terms(location)
     with Path(path).open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    return [Job(id=str(row.get("id", index)), title=row.get("title", ""), company=row.get("company", ""), location=row.get("location", ""), url=row.get("url", ""), description=row.get("description", ""), source="csv") for index, row in enumerate(rows) if not query or query in " ".join(row.values()).lower()]
+    jobs: list[Job] = []
+    for index, row in enumerate(rows):
+        searchable = " ".join(str(row.get(key, "") or "") for key in ("title", "company", "location", "description")).lower()
+        row_location = str(row.get("location", "")).lower()
+        if query_terms and not all(term in searchable for term in query_terms):
+            continue
+        if location_terms and not all(term in row_location for term in location_terms):
+            continue
+        jobs.append(Job(id=str(row.get("id", index)), title=row.get("title", ""), company=row.get("company", ""), location=row.get("location", ""), url=row.get("url", ""), description=row.get("description", ""), source="csv"))
+    return jobs
 
 
 def search_jobs(query: str, location: str = "", limit: int = 10) -> list[Job]:
@@ -27,4 +43,4 @@ def search_jobs(query: str, location: str = "", limit: int = 10) -> list[Job]:
             return [Job(id=item.get("job_id", str(index)), title=item.get("job_title", ""), company=item.get("employer_name", ""), location=item.get("job_city", ""), url=item.get("job_apply_link", ""), description=item.get("job_description", ""), source="jsearch") for index, item in enumerate(data[:limit])]
         except Exception:
             pass
-    return search_csv(query, limit and "data/jobs.csv")[:limit]
+    return search_csv(query, location, "data/jobs.csv")[:limit]

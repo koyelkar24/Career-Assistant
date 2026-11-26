@@ -75,8 +75,8 @@ def complete(prompt: str, *, model: str | None = None, retries: int = 2) -> str:
                 # spent 45 seconds rarely helps and can leave the UI blocked for
                 # minutes. Give the user a clear retry path instead.
                 raise RuntimeError(
-                    "Gemini took too long to respond. Please try the review again. "
-                    "Your local ATS score is still available."
+                    "The AI provider took too long to respond. Please try again. "
+                    "Local scoring and interview feedback still work."
                 ) from exc
             except requests.RequestException:
                 if attempt == retries:

@@ -1097,7 +1097,7 @@ export function renderJobs(root, ctx) {
       .map((job, idx) => {
         const isSaved = store.savedJobs.includes(job.title);
         const suspicious = job.safety && (job.safety.risk_level === 'high' || job.safety.flags?.length > 0);
-        const tags = job.tags?.length ? job.tags : ['Product design', 'Figma', 'Design systems'];
+        const tags = job.tags?.length ? job.tags : [];
         const url = safeURL(job.url);
         return `
           <article class="job-card" data-job-idx="${idx}">
@@ -1121,7 +1121,7 @@ export function renderJobs(root, ctx) {
                 <span>${icon('trending-up', 14)} ${escapeHTML(job.salary || 'Salary not listed')}</span>
                 <span>${icon('clock-3', 14)} ${escapeHTML(job.posted || 'Recently posted')}</span>
               </div>
-              <div class="job-tags">${tags.map(t => `<span>${escapeHTML(t)}</span>`).join('')}</div>
+              ${tags.length ? `<div class="job-tags">${tags.map(t => `<span>${escapeHTML(t)}</span>`).join('')}</div>` : ''}
               ${
                 suspicious
                   ? `<div class="job-safety-note">Signals to verify: ${escapeHTML((job.safety.flags || []).join(', '))}. ${escapeHTML(job.safety.recommendation || '')}</div>`
