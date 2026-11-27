@@ -34,3 +34,8 @@ When AI feedback is enabled, the relevant text is sent to the provider you confi
 - `server.py` serves the web files and provides the local REST API for the career tools.
 - `core/` and `services/` contain resume parsing, ATS scoring, security scanning, job search, database persistence, and AI coaching logic.
 - `data/`, `schemas/`, `prompts/`, and `tests/` contain sample job data, Pydantic models, prompt templates, and unit tests.
+
+
+
+
+
