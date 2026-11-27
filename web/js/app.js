@@ -289,7 +289,7 @@ function setAuthMode(mode) {
   if (sub) {
     sub.textContent = isReg
       ? 'Set up a local account to keep your career progress organized.'
-      : 'Sign in to continue to your Northstar career studio.';
+      : 'Sign in to continue to your CareerBloom workspace.';
   }
   if (pass) {
     pass.placeholder = isReg ? 'At least 6 characters' : 'Enter your password';
@@ -397,7 +397,7 @@ function bindStaticListeners() {
   el('auth-demo-btn')?.addEventListener('click', () => {
     const remember = Boolean(el('auth-remember')?.checked);
     handleSignIn(
-      { name: 'Alex Morgan', role: 'Product Designer', email: 'alex.morgan@northstar.local', demo: true },
+      { name: 'Alex Morgan', role: 'Product Designer', email: 'alex.morgan@careerbloom.local', demo: true },
       remember
     );
   });

@@ -182,7 +182,7 @@ class Handler(BaseHTTPRequestHandler):
 def main() -> None:
     host = os.getenv("CAREER_HOST", "127.0.0.1")
     port = int(os.getenv("CAREER_PORT", "8000"))
-    print(f"Career Assistant running at http://{host}:{port}")
+    print(f"CareerBloom running at http://{host}:{port}")
     ThreadingHTTPServer((host, port), Handler).serve_forever()
 
 

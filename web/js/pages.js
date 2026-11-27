@@ -445,7 +445,7 @@ export function renderGuidance(root, ctx) {
         <div class="chat-head">
           <div class="coach-avatar">${icon('sparkles', 18)}</div>
           <div>
-            <strong>Northstar career coach</strong>
+            <strong>CareerBloom career coach</strong>
             <small><i class="online-dot"></i> ${store.aiEnabled ? 'AI coach ready' : 'Guided offline mode · Here to help'}</small>
           </div>
           ${badgeHTML(`${store.guidanceMessages.length} messages`, 'subtle').replace('<span ', '<span id="chat-msg-count" ')}
@@ -1416,7 +1416,7 @@ export function renderSkills(root, ctx) {
 
   root.querySelector('#export-skills-btn')?.addEventListener('click', () => {
     const lines = [
-      `Northstar Skill Gap Analysis — ${targetRole}`,
+      `CareerBloom Skill Gap Analysis — ${targetRole}`,
       `Overall match: ${current.match}% (${current.haveCount} of ${current.totalCount} core skills)`,
       '',
       ...current.skills.map(([name, val, have]) => `- ${name}: ${val}% (${have ? 'In your toolkit' : 'Growth opportunity'})`),
@@ -1744,7 +1744,7 @@ export function renderRoadmap(root, ctx) {
 
   root.querySelector('#roadmap-export-btn')?.addEventListener('click', () => {
     const lines = [
-      'Northstar 3-Week Learning Roadmap',
+      'CareerBloom 3-Week Learning Roadmap',
       `Progress: ${store.roadmapDone.length} of ${totalSteps} steps completed`,
       '',
       ...ROADMAP_WEEKS.flatMap((w, wi) => [
@@ -1988,7 +1988,7 @@ export function renderSettings(root, ctx) {
   root.innerHTML = `
     ${pageHeaderHTML({
       eyebrow: 'YOUR SPACE, YOUR SETTINGS',
-      title: 'Make Northstar yours.',
+      title: 'Make CareerBloom yours.',
       description: 'A few simple ways to keep your workspace feeling right.',
     })}
 

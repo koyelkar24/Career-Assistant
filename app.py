@@ -1,4 +1,4 @@
-"""Start the Career Assistant (Northstar Career Studio) web application.
+"""Start the CareerBloom web application.
 
 Run this file to serve the local workspace:
 
@@ -38,7 +38,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Read command-line options, falling back to environment variables."""
     parser = argparse.ArgumentParser(
         prog="app.py",
-        description="Run Career Assistant locally and open it in your browser.",
+        description="Run CareerBloom locally and open it in your browser.",
     )
     parser.add_argument(
         "--host",
@@ -83,7 +83,7 @@ def main(argv: list[str] | None = None) -> int:
         from server import Handler
     except ModuleNotFoundError as exc:
         print(
-            f"Career Assistant is missing the '{exc.name}' package. "
+            f"CareerBloom is missing the '{exc.name}' package. "
             "Install dependencies with: pip install -r requirements.txt",
             file=sys.stderr,
         )
@@ -93,7 +93,7 @@ def main(argv: list[str] | None = None) -> int:
         httpd = LocalHTTPServer((args.host, args.port), Handler)
     except OSError as exc:
         print(
-            f"Could not start Career Assistant on {args.host}:{args.port} ({exc}).",
+            f"Could not start CareerBloom on {args.host}:{args.port} ({exc}).",
             file=sys.stderr,
         )
         print("Try another port, for example: python app.py --port 8080", file=sys.stderr)
@@ -101,7 +101,7 @@ def main(argv: list[str] | None = None) -> int:
 
     port = httpd.server_address[1]
     url = browser_url(args.host, port)
-    print(f"Career Assistant running at {url}", flush=True)
+    print(f"CareerBloom running at {url}", flush=True)
     print("Press Ctrl+C to stop the server.", flush=True)
 
     if not args.no_browser:
@@ -112,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print("\nStopping Career Assistant...")
+        print("\nStopping CareerBloom...")
     finally:
         httpd.server_close()
     return 0

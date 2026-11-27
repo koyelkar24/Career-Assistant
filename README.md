@@ -1,4 +1,6 @@
-# Northstar Career Studio (Career Assistant)
+# CareerBloom
+
+> *Growing into your full potential.*
 
 A local-first career workspace: resume building and ATS review, AI career coaching, job
 recommendations with scam screening, skill-gap analysis, a learning roadmap, mock interviews,
@@ -100,7 +102,7 @@ CAREER_PORT=9000 python app.py              # macOS/Linux
 
 1. The sign-in screen appears. Create a local account (name, target role, email, password of at
    least 6 characters) or choose **Demo Workspace** to browse with sample data and no account.
-2. Select the **northstar** logo in the sidebar to open the Overview page.
+2. Select the **careerbloom** logo in the sidebar to open the Overview page.
 3. To enable AI features, add an API key — see [Configuration](#configuration). The rest of the
    app works without one.
 
@@ -441,6 +443,10 @@ per line, paginated). Both raise a `RuntimeError` with install guidance if the l
 | Cache | `career_assistant.db` → `cache` | Generic key/value JSON |
 | Resume draft, tasks, saved jobs, profile, settings, notifications | browser `localStorage` (`northstar.*` keys) | Per browser profile |
 | Signed-in user | `localStorage` (`northstar.auth`) or `sessionStorage` | Depends on "remember me" |
+
+> **A note on the `northstar.*` keys:** the browser storage keys keep their original prefix so
+> that any drafts, profile and settings saved before the rename are still loaded. Renaming them
+> would silently reset that data. Nothing in the UI shows this prefix.
 | Job sample data | `data/jobs.csv` | Read-only |
 | Uploaded resumes | memory only | Never written to disk |
 
@@ -497,7 +503,7 @@ and `schemas` are importable.
 Activate the virtual environment and run `pip install -r requirements.txt`. `app.py` prints the
 missing package name and the install command when this happens.
 
-**`Could not start Career Assistant on 127.0.0.1:8000`**
+**`Could not start CareerBloom on 127.0.0.1:8000`**
 Another process owns the port. Use `python app.py --port 8080`. On Windows, port sharing is
 intentionally disabled so conflicts are reported instead of silently reusing the socket.
 
